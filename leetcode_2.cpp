@@ -9,7 +9,7 @@ vector<int> twoSum(vector<int>& nums, int target) {
                 }
             }
         }
-
+        return {}; // Return an empty vector if no solution is found
 }
 int main() {
     int n, target;
