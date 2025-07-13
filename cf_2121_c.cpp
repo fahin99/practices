@@ -2,51 +2,45 @@
 using namespace std;
 
 #define fastio ios::sync_with_stdio(false); cin.tie(0);
-#define all(x) (x).begin(), (x).end()
 typedef long long ll;
+
 void solve() {
     int n, m;
     cin >> n >> m;
     vector<vector<int>> mat(n, vector<int>(m));
+
+    int maxn = 0;
+    for(int i = 0; i < n; ++i)
+        for(int j = 0; j < m; ++j) {
+            cin >> mat[i][j];
+            maxn = max(maxn, mat[i][j]);
+        }
+
+    int times = 0; 
     for(int i = 0; i < n; ++i)
         for(int j = 0; j < m; ++j)
-            cin >> mat[i][j];
-    int maxn=*max_element(all(mat[0]));
-    for(int i = 1; i < n; ++i) {
-        int cur_max = *max_element(all(mat[i]));
-        if(cur_max > maxn) {
-            maxn = cur_max;
-        }
-    }
-    int cnt=0, times=0;
-    for(int i = 0; i < n; ++i) {
-        for(int j = 0; j < m; ++j) {
-            if(mat[i][j] == maxn) {
+            if(mat[i][j] == maxn)
                 times++;
-            }
-        }
-    }
+
+    // Now try each row i and column j
     for(int i = 0; i < n; ++i) {
         for(int j = 0; j < m; ++j) {
-            if(mat[i][j] == maxn) {
-                cnt++;
+            int count = 0;
+            for(int k = 0; k < m; ++k)
+                if(mat[i][k] == maxn)
+                    count++;
+            for(int k = 0; k < n; ++k)
+                if(k != i && mat[k][j] == maxn)
+                    count++;
+
+            if(count == times) {
+                cout << maxn - 1 << '\n';
+                return;
             }
         }
-        for(int j=0;j<m;j++){
-        for(int k=i+1;k<n;k++) {
-            if(mat[k][j] == maxn) {
-                cnt++;
-            }
-        }
-        if(cnt == times) {
-            cout<<maxn-1<<endl;
-            return;
-        }
-        cnt=0;
     }
-}
-    cout<<maxn<<endl;
-    return;
+
+    cout << maxn << '\n';
 }
 
 int main() {
