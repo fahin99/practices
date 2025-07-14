@@ -2,11 +2,16 @@
 #include <stack>
 using namespace std;
 
-int main() {
+
+/*the ans is totally wrong*/
+
+
+
+int main(){
     int t;
     cin >> t;
 
-    while (t--) {
+    while (t--){
         string s;
         cin >> s;
 
@@ -14,22 +19,24 @@ int main() {
         bool canBreak = false;
 
         for (char c : s) {
-            if (c == '(') {
+            if (c == '('){
                 st.push(c);
-            } else { // c == ')'
-                if (st.empty()) {
-                    // Found a closing bracket without matching '(' before it
+            } 
+            else{ 
+                if (st.empty()){
                     canBreak = true;
                     break;
-                } else {
+                } 
+                else{
                     st.pop();
                 }
             }
         }
 
-        if (canBreak || s.find(")(") != string::npos) {
+        if (canBreak || s.find(")(") != string::npos){
             cout << "YES\n";
-        } else {
+        } 
+        else{
             cout << "NO\n";
         }
     }
