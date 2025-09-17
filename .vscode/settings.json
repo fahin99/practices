@@ -105,6 +105,11 @@
     "streambuf": "cpp",
     "text_encoding": "cpp",
     "typeinfo": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "list": "cpp",
+    "fstream": "cpp",
+    "ranges": "cpp",
+    "regex": "cpp",
+    "valarray": "cpp"
   }
 }
