@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "climits": "c",
+        "cmath": "c",
+        "cstdio": "c",
+        "cstdlib": "c",
+        "limits": "c",
+        "new": "c",
+        "type_traits": "c",
+        "typeinfo": "c",
+        "stdio.h": "c",
+        "bit": "c",
+        "compare": "c",
+        "concepts": "c",
+        "cstdint": "c"
+    }
+}
