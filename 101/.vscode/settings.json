@@ -12,6 +12,9 @@
         "bit": "c",
         "compare": "c",
         "concepts": "c",
-        "cstdint": "c"
+        "cstdint": "c",
+        "string.h": "c",
+        "stdlib.h": "c",
+        "cstdarg": "c"
     }
 }
