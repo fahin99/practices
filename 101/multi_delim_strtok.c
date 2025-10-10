@@ -10,13 +10,6 @@ int my_strlen(const char *str){
     return length;
 }
 
-int is_delimiter(char c, const char *delimiters){
-    for(int i = 0; delimiters[i] != '\0'; i++){
-        if(c == delimiters[i]) return 1;
-    }
-    return 0;
-}
-
 char *strtoken_multi(char *str, const char *delimiters){
     static char *next = NULL;
     char token[1000];
@@ -30,32 +23,34 @@ char *strtoken_multi(char *str, const char *delimiters){
     
     if(next == NULL || my_strlen(next) == 0) return NULL;
     
-    // Skip leading delimiters
-    while(*next != '\0' && is_delimiter(*next, delimiters)){
-        next++;
-    }
-    
-    if(*next == '\0') return NULL;
-    
     int i = 0;
-    while(*next != '\0' && !is_delimiter(*next, delimiters)){
-        token[i++] = *next;
-        next++;
+    while(*next != '\0'){
+        int is_delim = 0;
+        for(int j = 0; delimiters[j] != '\0'; j++){
+            if(*next == delimiters[j]){
+                is_delim = 1;
+                break;
+            }
+        }
+        if(is_delim){
+            if(i>0) break; 
+            next++; 
+        }
+        else{
+            token[i++] = *next;
+            next++;
+        }
     }
+    if(i==0) return NULL;
     token[i] = '\0';
-    
-    if(my_strlen(token) > 0){
-        ret_token = (char*)malloc(my_strlen(token)+1);
-        strcpy(ret_token, token);
-        return ret_token;
-    }
-    
-    return NULL;
+    ret_token = (char*)malloc(my_strlen(token)+1);
+    strcpy(ret_token, token);
+    return ret_token;
 }
 
 int main(){
-    char str[200] = "Hello,World;This.is:a test,with;multiple.delimiters";
-    char *delimiters = ",.;:";
+    char str[200] = "Hello,World; This.is:a test,with;multiple. delimiters";
+    char *delimiters = ",.;: ";
     
     // Test my_strlen function
     printf("Testing my_strlen function:\n");
