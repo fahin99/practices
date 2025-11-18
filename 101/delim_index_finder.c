@@ -10,6 +10,44 @@ int my_strlen(const char *str){
     return length;
 }
 
+int my_strcmp(const char *str1, const char *str2){
+    int i = 0;
+    // Compare characters until we find a difference or reach end of either string
+    while(str1[i] != '\0' && str2[i] != '\0'){
+        if(str1[i] < str2[i]){
+            return -1; // str1 is lexicographically smaller
+        }
+        else if(str1[i] > str2[i]){
+            return 1;  // str1 is lexicographically greater
+        }
+        i++;
+    }
+    
+    // If we reach here, one or both strings ended
+    if(str1[i] == '\0' && str2[i] == '\0'){
+        return 0;  // Both strings are equal
+    }
+    else if(str1[i] == '\0'){
+        return -1; // str1 is shorter, so it's smaller
+    }
+    else{
+        return 1;  // str2 is shorter, so str1 is greater
+    }
+}
+
+char* my_strcpy(char *destination, const char *source){
+    int i = 0;
+    // Copy each character from source to destination
+    while(source[i] != '\0'){
+        destination[i] = source[i];
+        i++;
+    }
+    // Add null terminator to destination
+    destination[i] = '\0';
+    // Return pointer to destination (like standard strcpy)
+    return destination;
+}
+
 int find_delim_index(char *str, const char *delimiters){
     static char *next = NULL;
     static int current_index = 0;
@@ -17,7 +55,7 @@ int find_delim_index(char *str, const char *delimiters){
     if(str != NULL){
         if(next != NULL) free(next);
         next = (char*)malloc(my_strlen(str)+1);
-        strcpy(next, str);
+        my_strcpy(next, str);
         current_index = 0;
     }
     
@@ -55,7 +93,7 @@ char *get_token_with_delim_index(char *str, const char *delimiters, int *delim_i
     if(str != NULL){
         if(next != NULL) free(next);
         next = (char*)malloc(my_strlen(str)+1);
-        strcpy(next, str);
+        my_strcpy(next, str);
         current_index = 0;
     }
     
@@ -105,13 +143,27 @@ char *get_token_with_delim_index(char *str, const char *delimiters, int *delim_i
     
     token[i] = '\0';
     ret_token = (char*)malloc(my_strlen(token)+1);
-    strcpy(ret_token, token);
+    my_strcpy(ret_token, token);
     return ret_token;
 }
 
 int main(){
     char str[200] = "Hello,World;This.is:a test,with;multiple.delimiters";
     char *delimiters = ",.;:";
+    
+    // Test custom strcmp and strcpy functions
+    printf("=== Testing my_strcmp and my_strcpy ===\n");
+    char test1[] = "Hello";
+    char test2[] = "Hello";
+    char test3[] = "World";
+    char dest[50];
+    
+    printf("Comparing '%s' and '%s': %d\n", test1, test2, my_strcmp(test1, test2));
+    printf("Comparing '%s' and '%s': %d\n", test1, test3, my_strcmp(test1, test3));
+    printf("Comparing '%s' and '%s': %d\n", test3, test1, my_strcmp(test3, test1));
+    
+    my_strcpy(dest, "Testing my_strcpy function");
+    printf("Copied string: '%s'\n\n", dest);
     
     printf("Original string: %s\n", str);
     printf("Delimiters: %s\n\n", delimiters);
