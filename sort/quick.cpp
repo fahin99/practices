@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+<<<<<<< HEAD
 int partIdx(vector<int>& arr, int low, int high){
     int pivot=arr[low];
     int i=low, j=high;
@@ -25,4 +26,13 @@ int main(){
     qSort(arr, 0, n-1);
     for(int i=0; i<n; i++) cout<<arr[i]<<" ";
     return 0;
+=======
+int partIdx(vector<int>arr, int low, int high){
+    int pivot=arr[low];
+    int i=low, j=high;
+    while(i<j){
+        while(arr[i]<=arr[pivot] and i<=high) i++;
+        while(arr[j]>arr[pivot] and )
+    }
+>>>>>>> a91f22d2b2a4b092e95e43e0ed5f2d47d30ed4ad
 }
