@@ -4,12 +4,12 @@ using namespace std;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    int n;
+    long long n;
     cin>>n;
     if(n&1){
-        cout<<(n/2)-n<<endl;
+        cout<<(n>>1)-n<<endl;
     }
     else{
-        cout<<n/2<<endl;
+        cout<<(n>>1)<<endl;
     }
 }
